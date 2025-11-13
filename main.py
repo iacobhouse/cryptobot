@@ -36,5 +36,5 @@ def webhook():
 
 if __name__ == "__main__":
     bot.remove_webhook()
-    bot.set_webhook(url="https://crypto-bot.onrender.com/" + "IL_TUO_TOKEN_QUI")
+    bot.set_webhook(url="https://cryptobot-phqq.onrender.com" + "8548138805:AAE8JNgxiwz3ZifOpSIH0UfiszuPz6X1hG8")
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
