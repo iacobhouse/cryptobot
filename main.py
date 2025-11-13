@@ -28,7 +28,7 @@ Gioca QUI (bonus 500€):
 def home():
     return "Bot online!"
 
-@app.route('/' + "IL_TUO_TOKEN_QUI", methods=['POST'])
+@app.route('/' + "8548138805:AAE8JNgxiwz3ZifOpSIH0UfiszuPz6X1hG8", methods=['POST'])
 def webhook():
     update = telebot.types.Update.de_json(request.stream.read().decode("utf-8"))
     bot.process_new_updates([update])
