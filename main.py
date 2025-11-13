@@ -61,14 +61,27 @@ def home():
     return "Bot online! 🚀 Webhook pronto."
 
 # Avvia il bot
+import threading
+
+def keep_alive():
+    while True:
+        time.sleep(240)  # ogni 4 minuti
+        try:
+            requests.get("https://cryptobot-phqq.onrender.com/")
+            print("DEBUG: Ping interno inviato")
+        except:
+            pass
+
 if __name__ == "__main__":
     print("DEBUG: Avvio app...")
-    time.sleep(5)  # Pausa per init
-    print("DEBUG: Rimuovo webhook vecchio...")
-    bot.remove_webhook(drop_pending_updates=True)  # Pulisce pending updates!
+    time.sleep(5)
+    bot.remove_webhook(drop_pending_updates=True)
     time.sleep(2)
-    webhook_url = f"https://cryptobot-phqq.onrender.com//{TOKEN}"  # ← SOSTITUISCI 'crypto-bot' se nome diverso
-    print(f"DEBUG: Setto webhook su {webhook_url}")
-    bot.set_webhook(url=webhook_url, drop_pending_updates=True)  # Pulisce di nuovo
-    print("DEBUG: Webhook settato! App in ascolto.")
+    webhook_url = f"https://cryptobot-phqq.onrender.com//{TOKEN}"
+    bot.set_webhook(url=webhook_url, drop_pending_updates=True)
+    print("DEBUG: Webhook settato!")
+
+    # Avvia ping interno
+    threading.Thread(target=keep_alive, daemon=True).start()
+
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
